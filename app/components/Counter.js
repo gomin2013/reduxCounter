@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
+import {connect} from 'react-redux';
 
 import {
   StyleSheet,
@@ -7,32 +8,17 @@ import {
   View,
   TouchableOpacity
 } from 'react-native';
-import {connect} from "react-redux";
 
 class Counter extends Component {
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      text: 'Hello!'
-    };
-
-    this.changeText = this.changeText.bind(this);
-  }
-
-  changeText() {
-    this.setState({
-      text: 'Hello Changed!'
-    });
-  }
-
   render() {
-    const {value, onIncrement, onDecrement} = this.props;
+    const {value, onChangeText, onIncrement, onDecrement} = this.props;
 
     return (
       <View style={styles.container}>
-        <TouchableOpacity onPress={this.changeText}>
-          <Text style={styles.countText}>{this.state.text}</Text>
+        <TouchableOpacity onPress={onChangeText}>
+          <Text style={styles.countText}>
+            {value.text}
+          </Text>
         </TouchableOpacity>
         <Text style={styles.countText}>
           {value.count}
@@ -72,14 +58,9 @@ const styles = StyleSheet.create({
 
 Counter.propTypes = {
   value: PropTypes.object.isRequired,
+  onChangeText: PropTypes.func.isRequired,
   onIncrement: PropTypes.func.isRequired,
   onDecrement: PropTypes.func.isRequired
 };
 
-const mapStateToProps = (state) => {
-  return {
-    count: state.count
-  };
-};
-
-export default connect(mapStateToProps)(Counter);
+export default connect()(Counter);
