@@ -1,4 +1,4 @@
-platform :ios, '9.0'
+platform :ios, '11.0'
 require_relative '../node_modules/@react-native-community/cli-platform-ios/native_modules'
 
 target 'reduxCounter' do
@@ -34,14 +34,4 @@ target 'reduxCounter' do
   end
 
   use_native_modules!
-end
-
-target 'reduxCounter-tvOS' do
-  # Pods for reduxCounter-tvOS
-
-  target 'reduxCounter-tvOSTests' do
-    inherit! :search_paths
-    # Pods for testing
-  end
-
 end
